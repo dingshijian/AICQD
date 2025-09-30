@@ -1,0 +1,341 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AICQD.MainPage"
+             Title="AICQD - Your Quit Journey"
+             BackgroundColor="#F5F7FA">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
+            
+            <!-- Header Section -->
+            <Frame BackgroundColor="#4A90E2" 
+                   CornerRadius="15" 
+                   Padding="20"
+                   HasShadow="True">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="AICQD Quit Companion" 
+                           FontSize="24" 
+                           FontAttributes="Bold"
+                           TextColor="White"
+                           HorizontalOptions="Center"/>
+                    <Label x:Name="StatusLabel" 
+                           Text="Ready to start your journey" 
+                           FontSize="14"
+                           TextColor="White"
+                           HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Puff Count Display -->
+            <Frame BackgroundColor="White" 
+                   CornerRadius="15" 
+                   Padding="25"
+                   HasShadow="True">
+                <VerticalStackLayout Spacing="15">
+                    <Label Text="Today's Activity" 
+                           FontSize="18" 
+                           FontAttributes="Bold"
+                           TextColor="#2C3E50"
+                           HorizontalOptions="Center"/>
+                    <Label x:Name="PuffCountLabel" 
+                           Text="0 Puffs Today" 
+                           FontSize="48"
+                           FontAttributes="Bold"
+                           TextColor="#E74C3C"
+                           HorizontalOptions="Center"/>
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                        <Button Text="Log Puff" 
+                                Grid.Column="0"
+                                BackgroundColor="#E74C3C"
+                                TextColor="White"
+                                CornerRadius="10"
+                                Clicked="OnLogPuffClicked"/>
+                        <Button Text="Reset" 
+                                Grid.Column="1"
+                                BackgroundColor="#95A5A6"
+                                TextColor="White"
+                                CornerRadius="10"
+                                Clicked="OnResetTodayClicked"/>
+                    </Grid>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Bluetooth Device Connection -->
+            <Frame BackgroundColor="White" 
+                   CornerRadius="15" 
+                   Padding="20"
+                   HasShadow="True">
+                <VerticalStackLayout Spacing="15">
+                    <Label Text="Connect Your Device" 
+                           FontSize="18" 
+                           FontAttributes="Bold"
+                           TextColor="#2C3E50"/>
+                    
+                    <Label x:Name="BleStatusLabel" 
+                           Text="Bluetooth: Unknown" 
+                           FontSize="14"
+                           TextColor="#7F8C8D"/>
+                    
+                    <Button x:Name="ScanButton" 
+                            Text="Scan for AICQD Device"
+                            BackgroundColor="#3498DB"
+                            TextColor="White"
+                            CornerRadius="10"
+                            Clicked="OnScanClicked"/>
+                    
+                    <Label x:Name="DevicesHeaderLabel"
+                           Text="Available Devices:" 
+                           FontSize="14" 
+                           FontAttributes="Bold"
+                           TextColor="#34495E"
+                           IsVisible="False"/>
+                    
+                    <ListView x:Name="DevicesList"
+                              HeightRequest="200"
+                              BackgroundColor="Transparent"
+                              SeparatorColor="#BDC3C7"
+                              ItemTapped="OnDevicesListTapped">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Frame Margin="0,5" 
+                                           Padding="15" 
+                                           BackgroundColor="#ECF0F1"
+                                           CornerRadius="8"
+                                           HasShadow="False">
+                                        <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                                            <VerticalStackLayout Grid.Column="0" Spacing="5">
+                                                <Label Text="{Binding Name}" 
+                                                       FontSize="16" 
+                                                       FontAttributes="Bold"
+                                                       TextColor="#2C3E50"/>
+                                                <Label Text="{Binding Uuid}" 
+                                                       FontSize="12"
+                                                       TextColor="#7F8C8D"/>
+                                            </VerticalStackLayout>
+                                            <Label Grid.Column="1" 
+                                                   Text="{Binding Rssi, StringFormat='{0} dBm'}" 
+                                                   FontSize="12"
+                                                   TextColor="#95A5A6"
+                                                   VerticalOptions="Center"/>
+                                        </Grid>
+                                    </Frame>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                        <Button Text="Connect" 
+                                Grid.Column="0"
+                                BackgroundColor="#27AE60"
+                                TextColor="White"
+                                CornerRadius="10"
+                                Clicked="OnConnectClicked"/>
+                        <Button Text="Disconnect" 
+                                Grid.Column="1"
+                                BackgroundColor="#E67E22"
+                                TextColor="White"
+                                CornerRadius="10"
+                                Clicked="OnDisconnectClicked"/>
+                    </Grid>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Craving Management -->
+            <Frame BackgroundColor="White" 
+                   CornerRadius="15" 
+                   Padding="20"
+                   HasShadow="True">
+                <VerticalStackLayout Spacing="15">
+                    <Label Text="Craving Management" 
+                           FontSize="18" 
+                           FontAttributes="Bold"
+                           TextColor="#2C3E50"/>
+                    
+                    <Label Text="Current Craving Level:" 
+                           FontSize="14"
+                           TextColor="#34495E"/>
+                    
+                    <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                        <Slider x:Name="CravingSlider" 
+                                Grid.Column="0"
+                                Minimum="0" 
+                                Maximum="10"
+                                Value="0"
+                                MinimumTrackColor="#E74C3C"
+                                MaximumTrackColor="#BDC3C7"
+                                ThumbColor="#C0392B"
+                                ValueChanged="OnCravingChanged"/>
+                        <Label x:Name="CravingValueLabel" 
+                               Grid.Column="1"
+                               Text="0" 
+                               FontSize="24"
+                               FontAttributes="Bold"
+                               TextColor="#E74C3C"
+                               VerticalOptions="Center"/>
+                    </Grid>
+                    
+                    <Button Text="Play Craving Game" 
+                            BackgroundColor="#9B59B6"
+                            TextColor="White"
+                            CornerRadius="10"
+                            Clicked="OnPlayCravingGameClicked"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- AI Coaching -->
+            <Frame BackgroundColor="White" 
+                   CornerRadius="15" 
+                   Padding="20"
+                   HasShadow="True">
+                <VerticalStackLayout Spacing="15">
+                    <Label Text="AI Coach" 
+                           FontSize="18" 
+                           FontAttributes="Bold"
+                           TextColor="#2C3E50"/>
+                    
+                    <Frame BackgroundColor="#E8F4F8" 
+                           Padding="15" 
+                           CornerRadius="10"
+                           HasShadow="False">
+                        <Label x:Name="CoachMessageLabel" 
+                               Text="Hi! I'm your AI coach. Ready to support you on your quit journey!" 
+                               FontSize="14"
+                               TextColor="#2C3E50"
+                               LineBreakMode="WordWrap"/>
+                    </Frame>
+                    
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                        <Button Text="Start Session" 
+                                Grid.Column="0"
+                                BackgroundColor="#1ABC9C"
+                                TextColor="White"
+                                CornerRadius="10"
+                                Clicked="OnStartSessionClicked"/>
+                        <Button Text="End Session" 
+                                Grid.Column="1"
+                                BackgroundColor="#E67E22"
+                                TextColor="White"
+                                CornerRadius="10"
+                                Clicked="OnEndSessionClicked"/>
+                    </Grid>
+                    
+                    <Button Text="Chat with AI Coach" 
+                            BackgroundColor="#3498DB"
+                            TextColor="White"
+                            CornerRadius="10"
+                            Clicked="OnOpenAiChatClicked"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Quick Actions -->
+            <Frame BackgroundColor="White" 
+                   CornerRadius="15" 
+                   Padding="20"
+                   HasShadow="True">
+                <VerticalStackLayout Spacing="15">
+                    <Label Text="Quick Actions" 
+                           FontSize="18" 
+                           FontAttributes="Bold"
+                           TextColor="#2C3E50"/>
+                    
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="10" RowSpacing="10">
+                        <Button Text="View Progress" 
+                                Grid.Row="0" Grid.Column="0"
+                                BackgroundColor="#16A085"
+                                TextColor="White"
+                                CornerRadius="10"
+                                Clicked="OnViewProgressClicked"/>
+                        <Button Text="Achievements" 
+                                Grid.Row="0" Grid.Column="1"
+                                BackgroundColor="#F39C12"
+                                TextColor="White"
+                                CornerRadius="10"
+                                Clicked="OnViewAchievementsClicked"/>
+                        <Button Text="Community" 
+                                Grid.Row="1" Grid.Column="0"
+                                BackgroundColor="#8E44AD"
+                                TextColor="White"
+                                CornerRadius="10"
+                                Clicked="OnViewCommunityClicked"/>
+                        <Button Text="Settings" 
+                                Grid.Row="1" Grid.Column="1"
+                                BackgroundColor="#7F8C8D"
+                                TextColor="White"
+                                CornerRadius="10"
+                                Clicked="OnOpenSettingsClicked"/>
+                    </Grid>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Device Settings -->
+            <Frame BackgroundColor="White" 
+                   CornerRadius="15" 
+                   Padding="20"
+                   HasShadow="True">
+                <VerticalStackLayout Spacing="15">
+                    <Label Text="Device Settings" 
+                           FontSize="18" 
+                           FontAttributes="Bold"
+                           TextColor="#2C3E50"/>
+                    
+                    <Grid ColumnDefinitions="*,Auto" RowSpacing="10">
+                        <Label Text="Age Gate Protection" 
+                               Grid.Row="0" Grid.Column="0"
+                               FontSize="14"
+                               TextColor="#34495E"
+                               VerticalOptions="Center"/>
+                        <Switch x:Name="AgeGateSwitch" 
+                                Grid.Row="0" Grid.Column="1"
+                                OnColor="#27AE60"
+                                ThumbColor="White"
+                                Toggled="OnAgeGateToggled"/>
+                        
+                        <Label Text="Loss and Find Alert" 
+                               Grid.Row="1" Grid.Column="0"
+                               FontSize="14"
+                               TextColor="#34495E"
+                               VerticalOptions="Center"/>
+                        <Switch x:Name="LossFindSwitch" 
+                                Grid.Row="1" Grid.Column="1"
+                                OnColor="#3498DB"
+                                ThumbColor="White"
+                                Toggled="OnLossFindToggled"/>
+                    </Grid>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Data Management -->
+            <Frame BackgroundColor="White" 
+                   CornerRadius="15" 
+                   Padding="20"
+                   HasShadow="True">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Data Management" 
+                           FontSize="18" 
+                           FontAttributes="Bold"
+                           TextColor="#2C3E50"/>
+                    
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                        <Button Text="Refresh" 
+                                Grid.Column="0"
+                                BackgroundColor="#3498DB"
+                                TextColor="White"
+                                CornerRadius="10"
+                                Clicked="OnRefreshClicked"/>
+                        <Button Text="Export Data" 
+                                Grid.Column="1"
+                                BackgroundColor="#2ECC71"
+                                TextColor="White"
+                                CornerRadius="10"
+                                Clicked="OnExportClicked"/>
+                    </Grid>
+                </VerticalStackLayout>
+            </Frame>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

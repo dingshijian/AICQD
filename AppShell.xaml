@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       x:Class="AICQD.AppShell"
+       Title="AICQD">
+
+    <TabBar>
+        <ShellContent Title="Dashboard" Icon="dashboard.png">
+            <ShellContent.Content>
+                <ContentPage>
+                    <Label Text="Dashboard Loading..." 
+                           HorizontalOptions="Center" 
+                           VerticalOptions="Center" 
+                           FontSize="18"/>
+                </ContentPage>
+            </ShellContent.Content>
+        </ShellContent>
+        <ShellContent Title="AI Coach" Icon="aicoach.png">
+            <ShellContent.Content>
+                <Label Text="AI Coach - Coming Soon" HorizontalOptions="Center" VerticalOptions="Center" />
+            </ShellContent.Content>
+        </ShellContent>
+        <ShellContent Title="Community" Icon="community.png">
+            <ShellContent.Content>
+                <Label Text="Community - Coming Soon" HorizontalOptions="Center" VerticalOptions="Center" />
+            </ShellContent.Content>
+        </ShellContent>
+        <ShellContent Title="Profile" Icon="profile.png">
+            <ShellContent.Content>
+                <Label Text="Profile - Coming Soon" HorizontalOptions="Center" VerticalOptions="Center" />
+            </ShellContent.Content>
+        </ShellContent>
+    </TabBar>
+
+</Shell>

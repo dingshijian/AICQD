@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?xaml-comp compile="true" ?>
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <!-- Sci-Fi neon feel -->
+    <Color x:Key="PrimaryColor">#00FFF7</Color>
+    <Color x:Key="BackgroundColor">#0A0F29</Color>
+    <Color x:Key="TextColor">#E0E0E0</Color>
+    <Color x:Key="AccentColor">#FF00D4</Color>
+
+    <Style TargetType="Label">
+        <Setter Property="FontFamily" Value="Orbitron-Regular" />
+        <Setter Property="TextColor" Value="{StaticResource TextColor}" />
+    </Style>
+
+</ResourceDictionary>

@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <!-- Base palette (approximate mappings of App.css tokens) -->
+    <Color x:Key="ColorBackgroundLight">#FFFFFFFF</Color>
+    <Color x:Key="ColorBackgroundDark">#242424</Color>
+    <Color x:Key="ColorForegroundLight">#252525</Color>
+    <Color x:Key="ColorForegroundDark">#FFFFFF</Color>
+
+    <Color x:Key="ColorCardLight">#FFFFFFFF</Color>
+    <Color x:Key="ColorCardDark">#343434</Color>
+
+    <Color x:Key="ColorPrimaryLight">#343434</Color>
+    <Color x:Key="ColorPrimaryDark">#EAEAEA</Color>
+    <Color x:Key="ColorSecondaryLight">#F7F7F7</Color>
+    <Color x:Key="ColorSecondaryDark">#3F3F3F</Color>
+
+    <Color x:Key="ColorBorderLight">#EBDFF7</Color>
+    <Color x:Key="ColorBorderDark">#1A1A1A</Color>
+
+    <!-- Brushes -->
+    <SolidColorBrush x:Key="PageBackgroundColor"
+                   Color="{AppThemeBinding Light={StaticResource ColorBackgroundLight}, Dark={StaticResource ColorBackgroundDark}}" />
+    <SolidColorBrush x:Key="CardBackgroundBrush"
+                   Color="{AppThemeBinding Light={StaticResource ColorCardLight}, Dark={StaticResource ColorCardDark}}" />
+    <SolidColorBrush x:Key="PrimaryBrush"
+                   Color="{AppThemeBinding Light={StaticResource ColorPrimaryLight}, Dark={StaticResource ColorPrimaryDark}}" />
+    <SolidColorBrush x:Key="SecondaryBrush"
+                   Color="{AppThemeBinding Light={StaticResource ColorSecondaryLight}, Dark={StaticResource ColorSecondaryDark}}" />
+    <SolidColorBrush x:Key="BorderBrush"
+                   Color="{AppThemeBinding Light={StaticResource ColorBorderLight}, Dark={StaticResource ColorBorderDark}}" />
+
+</ResourceDictionary>

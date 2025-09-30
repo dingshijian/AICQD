@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?xaml-comp compile="true" ?>
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <Color x:Key="PrimaryColor">#4CAF50</Color>
+    <Color x:Key="BackgroundColor">#E8F5E9</Color>
+    <Color x:Key="TextColor">#1B5E20</Color>
+    <Color x:Key="AccentColor">#81C784</Color>
+
+    <Style TargetType="Label">
+        <Setter Property="FontFamily" Value="Georgia" />
+        <Setter Property="TextColor" Value="{StaticResource TextColor}" />
+    </Style>
+
+    <Style TargetType="Button">
+        <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
+        <Setter Property="TextColor" Value="White" />
+        <Setter Property="CornerRadius" Value="18" />
+    </Style>
+</ResourceDictionary>

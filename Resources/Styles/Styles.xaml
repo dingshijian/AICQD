@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <!-- Give every ContentPage the themed background -->
+    <Style TargetType="ContentPage">
+        <Setter Property="Background" Value="{StaticResource PageBackgroundColor}" />
+    </Style>
+
+    <!-- Common styles that echo Tailwind’s rounded/soft cards -->
+    <Style TargetType="Border">
+        <Setter Property="Stroke" Value="{StaticResource BorderBrush}" />
+        <Setter Property="StrokeThickness" Value="1" />
+        <Setter Property="Padding" Value="14" />
+        <Setter Property="Background" Value="{StaticResource CardBackgroundBrush}" />
+        <Setter Property="StrokeShape">
+            <Setter.Value>
+                <RoundRectangle CornerRadius="16" />
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="Button">
+        <Setter Property="CornerRadius" Value="12" />
+        <Setter Property="Padding" Value="14,10" />
+        <!-- Optional: make buttons use primary by default -->
+        <!-- <Setter Property="Background" Value="{StaticResource PrimaryBrush}" /> -->
+    </Style>
+
+    <Style TargetType="Label">
+        <Setter Property="TextColor"
+            Value="{AppThemeBinding Light={StaticResource ColorForegroundLight}, Dark={StaticResource ColorForegroundDark}}" />
+    </Style>
+
+</ResourceDictionary>
