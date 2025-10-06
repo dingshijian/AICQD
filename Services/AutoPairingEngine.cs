@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,15 +8,14 @@ namespace AICQD.Services
 {
     public class AutoPairingEngine
     {
-        private readonly HashSet<int> _trustedMfgIds = new() { 0x0059 }; // Nordic Semiconductor
         public event Action<BluetoothDevice>? OnPairingSuccess;
         public event Action<BluetoothDevice, string>? OnPairingFailure;
 
         public async Task TryAutoPairAsync(BleScannerService scanner, BluetoothDevice device)
         {
-            if (!IsSecureDevice(device))
+            if (!IsXiaoVapeSensor(device))
             {
-                System.Diagnostics.Debug.WriteLine($"[AUTOPAIR] Skipping insecure device: {device.Name}");
+                System.Diagnostics.Debug.WriteLine($"[AUTOPAIR] Skipping non-target device: {device.Name}");
                 return;
             }
 
@@ -35,13 +34,13 @@ namespace AICQD.Services
             }
         }
 
-        private bool IsSecureDevice(BluetoothDevice device)
+        private bool IsXiaoVapeSensor(BluetoothDevice device)
         {
-            // Simple security check: must be a known manufacturer and have a strong signal.
-            bool isTrusted = device.ManufacturerData.Any(data => data.Length > 1 && (data[1] << 8 | data[0]) == 0x0059);
+            // Simple security check: must be the target device and have a strong signal.
+            bool isTargetDevice = device.Name?.Contains("XiaoVapeSensor", StringComparison.OrdinalIgnoreCase) ?? false;
             bool hasGoodSignal = device.Rssi > -70;
 
-            return isTrusted && hasGoodSignal;
+            return isTargetDevice && hasGoodSignal;
         }
     }
 }
