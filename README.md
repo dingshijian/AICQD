@@ -33,7 +33,7 @@ The core intelligence of AICQD is powered by Edge Impulse. We focused on [mentio
 1.  **Data Collection:** We collected raw data using [e.g., Mobile Phone Accelerometer @ 62.5Hz].
 2.  **Signal Processing:** Applied [e.g., Spectral Analysis] to extract frequency and power characteristics.
 3.  **Model Architecture:** Trained a [e.g., Neural Network / K-means Anomaly Detection] to classify the input.
-4.  **Results:** Achieved an accuracy of **[XX]%** on the test set.
+4.  **Results:** Achieved an accuracy of 60% on the test set.
 
 ## 🛠️ Tech Stack & Hardware
 
